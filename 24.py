@@ -44,12 +44,12 @@ with con:
 
 print("\r\nКласс в котором больше всего хорошистов")
 with con:
-    data = con.execute("SELECT class, count(class) as cnt FROM SCHOOL where algebra = 4 or physics = 4 or russian = 4 group by class HAVING max(class)")
+    data = con.execute("select class, max(cnt) from (SELECT class, count(class) as cnt FROM SCHOOL where algebra = 4 or physics = 4 or russian = 4 group by class)")
     for row in data:
         print(row)
 
 print("\r\nКласс в котором больше всего школьников получили 5 по алгебре")
 with con:
-    data = con.execute("SELECT class, count(algebra) as cnt FROM SCHOOL where algebra = 5 group by class HAVING max(algebra)")
+    data = con.execute("select class, max(cnt) from (SELECT class, count(algebra) as cnt FROM SCHOOL where algebra = 5 group by class)")
     for row in data:
         print(row)
